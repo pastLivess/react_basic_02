@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../lib/react.development.js"></script>
+    <script src="../lib/react-dom.development.js"></script>
+    <script src="../lib/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor() {
+          super()
+          this.state = {
+            message: 'hello world',
+          }
+        }
+        btnClick(e) {
+          console.log(e)
+        }
+        btnClick2(event, a, b, c) {
+          console.log(event, a, b, c)
+        }
+        btnClick3(a, b, c, event) {
+          console.log(a, b, c, event)
+        }
+        render() {
+          return (
+            <div>
+              <h2>{this.state.message}</h2>
+
+              {/* event参数的传递 */}
+              <button onClick={this.btnClick}>修改message</button>
+
+              {/*使用箭头函数传递参数 event参数的传递并携带参数(掌握) */}
+              <button
+                onClick={(event) => {
+                  this.btnClick2(event, 1, 2, 3)
+                }}
+              >
+                修改message
+              </button>
+              {/* 使用bind绑定时,绑定event并传参 event对象是最后一个形参 */}
+              <button onClick={this.btnClick3.bind(this, 1, 2, 3)}>修改message</button>
+            </div>
+          )
+        }
+      }
+      const root = ReactDOM.createRoot(document.querySelector('#root'))
+      root.render(<App />)
+    </script>
+  </body>
+</html>
