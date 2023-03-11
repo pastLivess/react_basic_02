@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="../lib/react.development.js"></script>
+    <script src="../lib/react-dom.development.js"></script>
+    <script src="../lib/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      class App extends React.Component {
+        constructor() {
+          super()
+          this.state = {
+            message: 'hello react',
+            num: 0,
+            isShow: true,
+          }
+        }
+        changeShow() {
+          this.setState({
+            isShow: !this.state.isShow,
+          })
+        }
+        render() {
+          const { message, num, isShow } = this.state
+
+          let style = null
+          if (isShow) {
+            style = 'block'
+          } else {
+            style = 'none'
+          }
+          return (
+            <div>
+              <button onClick={() => this.changeShow()}>切换</button>
+              <h2>{isShow && message}</h2>
+              <h2 style={{ display: style }}>{num}</h2>
+            </div>
+          )
+        }
+      }
+      const root = ReactDOM.createRoot(document.querySelector('#root'))
+      root.render(<App />)
+    </script>
+  </body>
+</html>
